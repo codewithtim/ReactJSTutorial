@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React tutorial</title>
+    <script src="https://fb.me/react-0.14.7.js"></script>
+    <script src="https://fb.me/react-dom-0.14.7.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.2/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/babel">
+    var SecondComponent = React.createClass({
+      propTypes: {
+        name: React.PropTypes.string.isRequired,
+        location: React.PropTypes.string.isRequired
+      },
+      getDefaultProps: function() {
+        return {
+          name: 'Peter',
+          location: 'New York'
+        }
+      },
+      render: function() {
+        let name = this.props.name;
+        let location = this.props.location;
+        return (
+          <div>
+            <p>Hello, {name}!</p>
+            <p>I live in {location}</p>
+          </div>
+        )
+      }
+    });
+
+    // SecondComponent.propTypes = {
+    //   name: React.PropTypes.number
+    // }
+
+    ReactDOM.render(
+      <SecondComponent name="Simon" location="London"/>,
+      document.getElementById('app')
+    );
+    </script>
+  </body>
+</html>

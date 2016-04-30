@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React tutorial</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+  </head>
+  <body>
+    <script>
+    // Global
+    // var a = 10;
+    // function logA() {
+    //   console.log(a);
+    // }
+    // logA();
+    // console.log(a);
+
+    // Function
+    // function logB() {
+    //   var b = 100;
+    //   console.log(b);
+    // }
+    // logB();
+    // console.log(b);
+
+    // Lack of block scope
+    // var c = undefined;
+    // if (true) {
+    //   var c = 100;
+    //   console.log(c);
+    // }
+    //
+    // console.log(c);
+
+    if (true) {
+      let d = 100;
+      console.log(d);
+      if (true) {
+        console.log(d);
+      }
+    }
+
+    console.log(d);
+
+    </script>
+  </body>
+</html>

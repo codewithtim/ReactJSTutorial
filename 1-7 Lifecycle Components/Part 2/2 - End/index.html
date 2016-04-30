@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React tutorial</title>
+    <script src="https://fb.me/react-0.14.7.js"></script>
+    <script src="https://fb.me/react-dom-0.14.7.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.2/browser.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="lesson7challengestyling.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/babel">
+    var LifecycleComponent = React.createClass({
+      increment: function() {
+        this.setState({
+          count: this.state.count + 1
+        })
+      },
+
+      // 1 called ONCE
+      // BEFORE COMPONENT IS RENDERED
+      // HAPPENS WHEN OUR CLASS IS CREATED!!!
+      getDefaultProps: function() {
+        console.log("Getting our default properties");
+      },
+      // 2 called ONCE
+      // BEFORE COMPONENT IS RENDERED
+      // The return value will be used as the initial value of this.state.
+      getInitialState: function() {
+        console.log("Getting our initial state");
+        return({
+          count: 0
+        })
+      },
+      // 3 called ONCE
+      // BEFORE COMPONENT IS RENDERED
+      componentWillMount: function() {
+        console.log("Component is mounting");
+      },
+      // 4
+      // Happend whenever our component changes
+      render: function() {
+        console.log("Component is rendered");
+        return (
+          <button className="btn blue-btn" onClick={this.increment}>{this.state.count}</button>
+        )
+      },
+      // 5 ONLY ONCE
+      // AFTER COMPONENT HAS RENDERED
+      // If you want to integrate with other JavaScript frameworks,
+      //  set timers using setTimeout or setInterval, or send AJAX requests,
+      // perform those operations in this method.
+
+      componentDidMount: function() {
+        console.log("Component has rendered");
+        this.interval = setInterval(this.increment, 1000);
+      },
+
+      // 6 ONLY ONCE
+      // AFTER COMPONENT HAS RENDERED
+      // Perform any necessary cleanup in this method,
+      //  such as invalidating timers or cleaning up any DOM
+      // elements that were created in componentDidMount.
+      componentWillUnmount: function() {
+        clearInterval(this.interval);
+        console.log('Component Unmounted!');
+      }
+    });
+
+    var LifecycleContainer = React.createClass({
+        mount: function() {
+          ReactDOM.render(
+            <LifecycleComponent />,
+            document.getElementById('renderHere')
+          );
+        },
+        unmount: function() {
+          ReactDOM.unmountComponentAtNode(document.getElementById('renderHere'));
+        },
+        render: function() {
+          console.log("LifecycleContainer Rendered");
+          return(
+            <div className="container">
+              <button className="btn green-btn" onClick={this.mount}>Mount</button>
+              <button className="btn red-btn" onClick={this.unmount}>Unmount</button>
+              <div id="renderHere"></div>
+            </div>
+          )
+        }
+    });
+
+    ReactDOM.render(
+      <LifecycleContainer />,
+      document.getElementById('app')
+    );
+    </script>
+  </body>
+</html>

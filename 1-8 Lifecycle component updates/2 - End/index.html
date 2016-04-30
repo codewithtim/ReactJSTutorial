@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React tutorial</title>
+    <script src="https://fb.me/react-0.14.7.js"></script>
+    <script src="https://fb.me/react-dom-0.14.7.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.2/browser.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="lesson8styling.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/babel">
+    var LikesComponent = React.createClass({
+      updateLikes: function() {
+        ReactDOM.render(
+          <LikesComponent likes={this.props.likes+1}/>,
+          document.getElementById("app")
+        )
+      },
+      getDefaultProps: function() {
+        return({
+          likes: 0
+        })
+      },
+      getInitialState: function() {
+        return({
+          popular: false
+        })
+      },
+      componentWillReceiveProps: function(nextProps) {
+        // console.log(nextProps);
+        // console.log("Componentwillreceiveprops");
+        this.setState({
+          popular: nextProps.likes >= 10
+        })
+      },
+      shouldComponentUpdate: function(nextProps, nextState) {
+        // console.log("Should update?");
+        // console.log("Should update nextProps: ", nextProps);
+        // console.log("Should update nextState: ", nextState);
+        return nextProps.likes % 2 === 0;
+      },
+      render: function() {
+        console.log("Component Rendered");
+        return (
+          <div className="container">
+            <h1>{this.state.popular ? "I'm popular" : null}</h1>
+            <button className="btn blue-btn" onClick={this.updateLikes}>Likes: {this.props.likes}</button>
+          </div>
+        )
+      },
+      componentDidUpdate: function(prevProps, prevState) {
+        console.log("Previous Props ", prevProps);
+        console.log("Previous State ", prevState);
+        console.log(ReactDOM.findDOMNode(this));
+      }
+    });
+
+    ReactDOM.render(
+      <LikesComponent />,
+      document.getElementById("app")
+    );
+    </script>
+  </body>
+</html>

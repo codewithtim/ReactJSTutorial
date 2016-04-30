@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React tutorial</title>
+    <script src="https://fb.me/react-0.14.7.js"></script>
+    <script src="https://fb.me/react-dom-0.14.7.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.2/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/babel">
+    class Counter extends React.Component {
+      constructor(props) {
+        super(props);
+        console.log(this.props);
+        this.state = { count: 0 }
+        this.click = this.click.bind(this);
+      }
+      click(value) {
+        // alert("Clicked");
+        console.log(value);
+      }
+      render() {
+        console.log(this)
+        return (
+          <div onClick={() => this.click(10)}>{this.props.text}</div>
+        )
+      }
+    }
+
+    Counter.defaultProps = { text: "Hello" }
+    Counter.propTypes = { text: React.PropTypes.string }
+
+    ReactDOM.render(
+      <Counter />,
+      document.getElementById('app')
+    );
+    </script>
+  </body>
+</html>

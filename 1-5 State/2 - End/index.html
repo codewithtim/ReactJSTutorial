@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React tutorial</title>
+    <script src="https://fb.me/react-0.14.7.js"></script>
+    <script src="https://fb.me/react-dom-0.14.7.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.2/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/babel">
+    var NameStateComponent = React.createClass({
+      resetName: function() {
+        this.setState({
+          name: ''
+        })
+      },
+      nameChanged: function(event) {
+        this.setState({
+          name: event.target.value
+        })
+      },
+      getInitialState: function() {
+        return {
+          name: ''
+        }
+      },
+      render: function(){
+        return (
+          <div>
+            <input type='text' onChange={this.nameChanged} />
+            <h1>Hello my name is {this.state.name} </h1>
+            <button onClick={this.resetName}>Reset name</button>
+          </div>
+        )
+      }
+    });
+
+    ReactDOM.render(
+      <NameStateComponent />,
+      document.getElementById('app')
+    );
+    </script>
+  </body>
+</html>
